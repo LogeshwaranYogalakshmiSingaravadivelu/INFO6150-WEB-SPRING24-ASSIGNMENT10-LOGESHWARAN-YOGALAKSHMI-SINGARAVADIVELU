@@ -40,6 +40,7 @@ export default function SignIn() {
   const val =1;
   const [error, setError] = useState(false);
   const [redirectToHome, setRedirectToHome] = useState(false);
+  const [type,setType] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -66,6 +67,10 @@ export default function SignIn() {
       });
       console.log(response.data);
       console.log(response.data.message);
+      console.log(response.data.type);
+      if(response.data.type === "admin"){
+        setType(true);
+      }
       if (response.data.message) {
         localStorage.setItem('session', JSON.stringify(response.data.sessionData));
         setRedirectToHome(true);
@@ -77,7 +82,13 @@ export default function SignIn() {
   };
 
   if (redirectToHome) {
-    return <Navigate to="/home" replace />;
+    if(type){
+      return <Navigate to="/admin" replace />;
+    }else{
+      return <Navigate to="/home" replace />;
+    }
+      
+    
   }
 
   return (

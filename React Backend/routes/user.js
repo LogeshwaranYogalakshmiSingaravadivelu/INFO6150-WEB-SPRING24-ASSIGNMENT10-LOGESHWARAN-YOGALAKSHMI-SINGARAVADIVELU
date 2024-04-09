@@ -74,7 +74,7 @@ router.post("/products", async (req,res)=>{
         //console.log(pass);
         //console.log(email);
         const user = await Data.findOne({ email: email });
-        //console.log(user);
+        //console.log(user.type);
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -84,8 +84,10 @@ router.post("/products", async (req,res)=>{
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         req.session.email = email;
-        console.log(req.session.email);
-        res.json({ message: true, sessionData: req.session.email });
+        //console.log(req.session.email);
+        //console.log(req.body.type);
+        //console.log(user.type);
+        res.json({ message: true, sessionData: req.session.email, type: user.type });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
