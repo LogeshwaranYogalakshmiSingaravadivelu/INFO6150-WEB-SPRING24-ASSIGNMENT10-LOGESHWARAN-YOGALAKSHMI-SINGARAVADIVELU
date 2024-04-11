@@ -87,7 +87,7 @@ router.post("/products", async (req,res)=>{
         //console.log(req.session.email);
         //console.log(req.body.type);
         //console.log(user.type);
-        res.json({ message: true, sessionData: req.session.email, type: user.type });
+        res.json({ message: true, sessionData: user.type, type: user.type });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }

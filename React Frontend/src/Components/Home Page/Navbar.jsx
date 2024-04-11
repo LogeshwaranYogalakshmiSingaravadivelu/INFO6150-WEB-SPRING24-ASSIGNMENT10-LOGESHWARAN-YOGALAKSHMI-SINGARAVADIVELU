@@ -24,8 +24,6 @@ const navItems = [
   { name: "Job Listings", path: "/job" },
   { name: "Contact", path: "/contact" },
   { name: "Company Showcase", path: "/company" },
-  { name: "Admin", path: "/admin" },
-  { name: "AddJob", path: "/addjob" },
   { name: "Jobs", path: "/adminjob" }
 ];
 
@@ -92,11 +90,11 @@ function DrawerAppBar(props) {
             <Typography
               variant="h6"
               component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+              sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}
             >
               Job Portal
             </Typography>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center' }}>
               {navItems.map((item) => (
                 <Button
                   key={item.name}

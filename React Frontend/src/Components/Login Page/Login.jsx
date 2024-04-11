@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import { useLayoutEffect } from 'react';
 
 function Copyright(props) {
   return (
@@ -36,11 +37,14 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
-  const val =1;
+export default function SignIn({ setShowNavbar }) {
+  useLayoutEffect(() => {
+    setShowNavbar(true);
+  }, []);
+  const val = 1;
   const [error, setError] = useState(false);
   const [redirectToHome, setRedirectToHome] = useState(false);
-  const [type,setType] = useState(false);
+  const [type, setType] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -68,11 +72,14 @@ export default function SignIn() {
       console.log(response.data);
       console.log(response.data.message);
       console.log(response.data.type);
-      if(response.data.type === "admin"){
+      if (response.data.type === "admin") {
         setType(true);
       }
       if (response.data.message) {
-        localStorage.setItem('session', JSON.stringify(response.data.sessionData));
+        localStorage.setItem(
+          "session",
+          JSON.stringify(response.data.sessionData)
+        );
         setRedirectToHome(true);
       }
       // console.log("Hello World");
@@ -82,13 +89,11 @@ export default function SignIn() {
   };
 
   if (redirectToHome) {
-    if(type){
+    if (type) {
       return <Navigate to="/admin" replace />;
-    }else{
+    } else {
       return <Navigate to="/home" replace />;
     }
-      
-    
   }
 
   return (

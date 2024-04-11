@@ -57,7 +57,7 @@ export default function SignUp() {
   };
 
   if (redirectToHome) {
-    return <Navigate to="/addjob" replace />;
+    return <Navigate to="/admin" replace />;
   }
 
   return (

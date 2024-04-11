@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLayoutEffect } from 'react';
 import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -32,8 +33,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedTables() {
+export default function CustomizedTables({ setShowNavbar }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const sessionData = localStorage.getItem('session');
+    if (!sessionData) {
+      navigate('/');
+    }
+  }, [navigate]);
   const [data, setData] = useState([]);
+  useLayoutEffect(() => {
+    setShowNavbar(false);
+  }, []);
 
   useEffect(() => {
     axios
